@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
-const BottomNav: React.FC = () => {
+const BottomNav = () => {
   return (
     <View className="flex-row justify-between items-center px-6 py-3 bg-white border-t border-gray-200">
       <TouchableOpacity>

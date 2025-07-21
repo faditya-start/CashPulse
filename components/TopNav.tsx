@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 
-const TopNav: React.FC = () => {
+const TopNav = () => {
   return (
     <View className="flex-row justify-between items-center px-6 py-4 bg-white">
       <Text className="text-lg font-bold">Halo, Daffa</Text>
