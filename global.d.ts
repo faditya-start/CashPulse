@@ -1,4 +1,6 @@
 import 'react-native';
+/// <reference types="nativewind/types" />
+
 
 declare module 'react-native' {
   interface ViewProps {
