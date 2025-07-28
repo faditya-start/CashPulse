@@ -1,18 +1,42 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 
 const TopNav = () => {
   return (
-    <View className="flex-row justify-between items-center px-6 py-4 bg-white">
-      <Text className="text-lg font-bold">Halo, Daffa</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Halo, Daffa</Text>
       <TouchableOpacity>
         <Image
           source={{ uri: 'https://randomuser.me/api/portraits/men/1.jpg' }}
-          className="w-10 h-10 rounded-full border-2 border-blue-500"
+          style={styles.avatar}
         />
       </TouchableOpacity>
     </View>
   );
 };
 
-export default TopNav; 
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 24,
+    marginTop: 24,
+    paddingVertical: 16,
+    backgroundColor: "#fff",
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#111827",
+  },
+  avatar: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    borderWidth: 2,
+    borderColor: "#3b82f6", // blue-500
+  },
+});
+
+export default TopNav;

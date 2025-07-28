@@ -1,20 +1,42 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 const BottomNav = () => {
   return (
-    <View className="flex-row justify-between items-center px-6 py-3 bg-white border-t border-gray-200">
+    <View style={styles.container}>
       <TouchableOpacity>
-        <Text className="text-blue-500">Home</Text>
+        <Text style={[styles.text, styles.active]}>Home</Text>
       </TouchableOpacity>
       <TouchableOpacity>
-        <Text className="text-gray-500">Transaksi</Text>
+        <Text style={styles.text}>Transaksi</Text>
       </TouchableOpacity>
       <TouchableOpacity>
-        <Text className="text-gray-500">Profil</Text>
+        <Text style={styles.text}>Profil</Text>
       </TouchableOpacity>
     </View>
   );
 };
 
-export default BottomNav; 
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    marginBottom: 24,
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 24,
+    paddingVertical: 16,
+    backgroundColor: "#fff",
+    borderTopWidth: 1,
+    borderTopColor: "#e5e7eb",
+  },
+  text: {
+    color: "#6b7280", // gray-500
+    fontSize: 16,
+  },
+  active: {
+    color: "#3b82f6", // blue-500
+    fontWeight: "bold",
+  },
+});
+
+export default BottomNav;
