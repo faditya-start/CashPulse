@@ -1,17 +1,20 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { useRouter, usePathname } from 'expo-router';
 
 const BottomNav = () => {
+  const router = useRouter();
+  const pathname = usePathname();
   return (
     <View style={styles.container}>
-      <TouchableOpacity>
-        <Text style={[styles.text, styles.active]}>Home</Text>
+       <TouchableOpacity onPress={() => router.push('/')}>
+        <Text style={[styles.text, pathname === '/' && styles.active]}>Home</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => router.push('/(tabs)/history')}>
+        <Text style={[styles.text, pathname === '/history' && styles.active]}>Riwayat</Text>
       </TouchableOpacity>
       <TouchableOpacity>
-        <Text style={styles.text}>Transaksi</Text>
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <Text style={styles.text}>Profil</Text>
+        <Text style={[styles.text, pathname === '/profile' && styles.active]}>Profil</Text>
       </TouchableOpacity>
     </View>
   );

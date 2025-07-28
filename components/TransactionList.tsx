@@ -13,11 +13,11 @@ export default function TransactionList({ transactions }: { transactions: Transa
   return (
     <View style={styles.card}>
       <Text style={styles.title}>Transaksi Terbaru</Text>
-      <FlatList
-        data={transactions}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => (
-          <View style={styles.row}>
+      {transactions.length === 0 ? (
+        <Text style={styles.empty}>Tidak ada transaksi</Text>
+      ) : (
+        transactions.map(item => (
+          <View key={item.id} style={styles.row}>
             <View>
               <Text style={styles.itemTitle}>{item.title}</Text>
               <Text style={styles.itemDate}>{item.date}</Text>
@@ -29,9 +29,8 @@ export default function TransactionList({ transactions }: { transactions: Transa
               {item.type === "income" ? "+" : "-"} Rp {item.amount.toLocaleString('id-ID')}
             </Text>
           </View>
-        )}
-        ListEmptyComponent={<Text style={styles.empty}>Tidak ada transaksi</Text>}
-      />
+        ))
+      )}
     </View>
   );
 }

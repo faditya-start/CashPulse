@@ -5,7 +5,7 @@ export default function BalanceCard({balance}:{balance: number}) {
     return(
         <View style={styles.card}>
             <Text style={styles.label}>Total Saldo</Text>
-            <Text style={styles.balance}>Rp {balance}</Text>
+            <Text style={styles.balance}>Rp {balance.toLocaleString('id-ID')}</Text>
         </View>
     )
 }
