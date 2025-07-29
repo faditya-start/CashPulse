@@ -1,5 +1,7 @@
 import React from "react";
-import { View, Text, FlatList, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
+import { useRouter } from "expo-router";
+import { useRoute } from "@react-navigation/native";
 
 type Transaction = {
   id: string;
@@ -9,30 +11,62 @@ type Transaction = {
   date: string;
 };
 
-export default function TransactionList({ transactions }: { transactions: Transaction[] }) {
+type Props = {
+  transactions: Transaction[];
+  enableNavigation?: boolean;
+}
+
+export default function TransactionList({ transactions, enableNavigation = false }: Props) {
+  const router = useRouter();
   return (
-    <View style={styles.card}>
-      <Text style={styles.title}>Transaksi Terbaru</Text>
+    <View style= {styles.card}>
+      <Text style={styles.title}>
+        Daftar Transaksi
+      </Text>
       {transactions.length === 0 ? (
-        <Text style={styles.empty}>Tidak ada transaksi</Text>
-      ) : (
-        transactions.map(item => (
-          <View key={item.id} style={styles.row}>
-            <View>
-              <Text style={styles.itemTitle}>{item.title}</Text>
-              <Text style={styles.itemDate}>{item.date}</Text>
-            </View>
-            <Text style={[
-              styles.amount,
-              item.type === "income" ? styles.income : styles.expense
-            ]}>
-              {item.type === "income" ? "+" : "-"} Rp {item.amount.toLocaleString('id-ID')}
-            </Text>
-          </View>
-        ))
-      )}
+        <Text style={styles.empty}>
+          Tidak ada transaksi
+        </Text>
+      ) : 
+      ( 
+        transactions.map(item => 
+          {
+            const content = (
+              <>
+                <View>
+                  <Text style={styles.itemTitle}>{item.title}</Text>
+                  <Text style={styles.itemDate}>{item.date}</Text>
+                </View>
+                <Text
+                  style={[
+                    styles.amount,
+                    item.type === "income" ? styles.income : styles.expense,
+                  ]}
+                >
+                  {item.type === "income" ? "+" : "-"} Rp {item.amount.toLocaleString("id-ID")}
+                </Text>
+              </> 
+            );
+
+            return enableNavigation ? (
+              <Pressable
+                key={item.id}
+                onPress={() => router.push(`/history/${item.id}`)}
+                style={styles.row}
+              >
+                {content}
+              </Pressable>
+            ) : (
+              <View key={item.id} style={styles.row}>
+                {content}
+              </View>
+            );
+          }
+        )  
+      ) 
+      }
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
